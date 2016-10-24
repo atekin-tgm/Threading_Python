@@ -118,7 +118,7 @@ class MessageDecrypt(threading.Thread):
 
     def __init__(self, user_input2):
         """
-        calles by decrypt-method to decrypt the entered message
+        called by decrypt-method to decrypt the entered message
         :param user_input2:
         """
         threading.Thread.__init__(self)
