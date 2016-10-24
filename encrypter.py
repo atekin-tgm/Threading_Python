@@ -1,5 +1,13 @@
+"""
+@author:    TEKIN Abdurrahim Burak
+@date:      2016-10-24
+-- Encryption program with usage of Threads --
+"""
+
 import threading
 
+# unused lists
+"""
 buchstaben = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
               "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
               "u", "v", "w", "x", "y", "z"]
@@ -9,7 +17,9 @@ caeser = ["D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
           "X", "Y", "Z", "A", "B", "C"]
 
 num = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+"""
 
+# dictionary for encryption
 encrypt_dict = {"a": "D",
                 "b": "E",
                 "c": "F",
@@ -38,6 +48,7 @@ encrypt_dict = {"a": "D",
                 "z": "C",
                 " ": " "}
 
+# dictionary for decryption
 decrypt_dict = {"D": "A",
                 "E": "B",
                 "F": "C",
@@ -70,20 +81,27 @@ decrypt_dict = {"D": "A",
 class MessageEncrypt(threading.Thread):
 
     """
-    encrypts the input-message with the dictionary for encryption
+    encrypts the entered message via dictionary for encryption
     """
 
     def __init__(self, user_input):
-
+        """
+        called by encrypt-method to encrypt the entered message
+        :param user_input:
+        """
         threading.Thread.__init__(self)
 
         self.user_input = user_input
         self.encrypted = ""
 
     def run(self):
+        """
+        run method for encryption (replacing letters and printing)
+        :return:
+        """
         encrypted = ""
 
-        # for loop for encrypting the message
+        # for-loop for encrypting the message
         for c in self.user_input:
             if c in encrypt_dict:
                 encrypted += encrypt_dict[c]
@@ -94,25 +112,50 @@ class MessageEncrypt(threading.Thread):
 
 class MessageDecrypt(threading.Thread):
 
-    def __init__(self, user_input2):
+    """
+    decrypts the entered message via dictionary for decryption
+    """
 
+    def __init__(self, user_input2):
+        """
+        calles by decrypt-method to decrypt the entered message
+        :param user_input2:
+        """
         threading.Thread.__init__(self)
 
         self.user_input2 = user_input2
         self.decrypted = ""
 
     def run(self):
+        """
+        run method for decryption (replacing letters and printing)
+        :return:
+        """
         decrypted = ""
 
+        # for-loop for decrypting the message
         for c in self.user_input2:
             if c in decrypt_dict:
                 decrypted += decrypt_dict[c]
 
+        # prints the input message + the decrypted message
         print(self.user_input2, decrypted)
 
 
 class Crypt:
+
+    """
+    interface where you choose what you want to do
+    """
+
     def __init__(self):
+
+        """
+        while True:
+        - enter e for encryption
+        - enter d for decryption
+        - you are asked until you quit the program by entering c
+        """
 
         while True:
             choice = input("Do you want to encrypt or decrypt? - e/d\nc for close! ")
@@ -131,6 +174,11 @@ class Crypt:
                 print("==================================")
 
     def encrypt(self):
+        """
+        parts the input in threads and calls MessageEncrypt()
+        :return:
+        """
+
         encrypted = ""
         threads = []
 
@@ -159,6 +207,11 @@ class Crypt:
 
 
     def decrypt(self):
+        """
+        parts the input in threads and calls MessageDecrypt()
+        :return:
+        """
+
         decrypted = ""
         threads2 = []
 
@@ -185,6 +238,6 @@ class Crypt:
 
         print("==================================")
 
-
+# starting the program
 c = Crypt()
 
