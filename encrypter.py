@@ -1,4 +1,3 @@
-import math
 import threading
 
 buchstaben = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
